@@ -1,15 +1,29 @@
+import React, { useState } from 'react';
 import './App.css'
-import Card from './compnents/Card';
+import CardComponent from './compnents/Card';
+import CardDeck from './lib/CardDeck';
+import Card from './lib/Card';
 
-const App = () => {
+const App: React.FC = () => {
+
+  const [deck] = useState(new CardDeck());
+  const [cards, setCards] = useState<Card[]>(deck.getCards(5));
+
+  const drawCard = () => {
+    const newCard = deck.getCard();
+    if(newCard) {
+    setCards([...cards, newCard]);
+    }
+  }
 
   return (
     <div className="playingCards faceImages">
-      <Card rank={"k"} suit={"diams"}/>
-      <Card rank={"q"} suit={"hearts"}/>
-      <Card rank={"a"} suit={"spades"}/>
-      <Card rank={"10"} suit={"clubs"}/>
+      {cards.map((card, index) => (
+        <CardComponent key={index} rank={card.rank} suit={card.suit}/>
+      ))}
+      <button onClick={drawCard}>Draw a Card</button>
     </div>
+    
   )
 }
 
