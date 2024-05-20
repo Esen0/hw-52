@@ -1,4 +1,5 @@
 import React from "react";
+import '../cards.css'
 
 interface Props {
     rank: string;
@@ -18,10 +19,7 @@ const Card: React.FC<Props> = ({rank, suit}) => {
             <span className="rank">{rank}</span>
             <span className="suit">{suitSymbols[suit]}</span>
         </span>
-    )
-}
+    );
+};
 
 export default Card;
-
-// rank={"K"} suit={"diams"}
-// ${rank} ${suit}
